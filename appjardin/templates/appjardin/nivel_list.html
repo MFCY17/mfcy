@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'app_name_nivel_list' %}">Nivel Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>id_nivel</td>
+    <td>nombre</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.id_nivel }}</td>
+    <td>{{ object.nombre }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'app_name_nivel_create' %}">Create new Nivel</a>
+{% endblock %}

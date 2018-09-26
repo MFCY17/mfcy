@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'app_name_estudiante_list' %}">Estudiante Listing</a></p>
+<table class="table">
+<tr><td>id_estudiante</td><td>{{ object.id_estudiante }}</td></tr>
+<tr><td>tipo_sangre</td><td>{{ object.tipo_sangre }}</td></tr>
+<tr><td>alergias</td><td>{{ object.alergias }}</td></tr>
+<tr><td>id_secretaria</td><td>{{ object.id_secretaria }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Estudiante</a>
+
+{% endblock %}

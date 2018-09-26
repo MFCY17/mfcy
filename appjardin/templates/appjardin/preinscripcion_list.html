@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'app_name_preinscripcion_list' %}">Preinscripcion Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>id_preinscripcion</td>
+    <td>fecha</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.id_preinscripcion }}</td>
+    <td>{{ object.fecha }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'app_name_preinscripcion_create' %}">Create new Preinscripcion</a>
+{% endblock %}

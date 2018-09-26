@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'app_name_nivel_list' %}">Nivel Listing</a></p>
+<table class="table">
+<tr><td>id_nivel</td><td>{{ object.id_nivel }}</td></tr>
+<tr><td>nombre</td><td>{{ object.nombre }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Nivel</a>
+
+{% endblock %}

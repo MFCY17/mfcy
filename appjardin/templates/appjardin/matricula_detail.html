@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'app_name_matricula_list' %}">Matricula Listing</a></p>
+<table class="table">
+<tr><td>id_matricula</td><td>{{ object.id_matricula }}</td></tr>
+<tr><td>costo</td><td>{{ object.costo }}</td></tr>
+<tr><td>fecha</td><td>{{ object.fecha }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Matricula</a>
+
+{% endblock %}

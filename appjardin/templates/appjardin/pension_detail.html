@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'app_name_pension_list' %}">Pension Listing</a></p>
+<table class="table">
+<tr><td>id_pension</td><td>{{ object.id_pension }}</td></tr>
+<tr><td>costo</td><td>{{ object.costo }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Pension</a>
+
+{% endblock %}

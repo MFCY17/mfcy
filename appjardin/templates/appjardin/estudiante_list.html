@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'app_name_estudiante_list' %}">Estudiante Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>id_estudiante</td>
+    <td>tipo_sangre</td>
+    <td>alergias</td>
+    <td>id_secretaria</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.id_estudiante }}</td>
+    <td>{{ object.tipo_sangre }}</td>
+    <td>{{ object.alergias }}</td>
+    <td>{{ object.id_secretaria }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'app_name_estudiante_create' %}">Create new Estudiante</a>
+{% endblock %}

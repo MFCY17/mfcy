@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'app_name_profesor_list' %}">Profesor Listing</a></p>
+<table class="table">
+<tr><td>id_profesor</td><td>{{ object.id_profesor }}</td></tr>
+<tr><td>titulo_profesor</td><td>{{ object.titulo_profesor }}</td></tr>
+<tr><td>celular</td><td>{{ object.celular }}</td></tr>
+<tr><td>estado_civil</td><td>{{ object.estado_civil }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Profesor</a>
+
+{% endblock %}
