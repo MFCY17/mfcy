@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'app_name_nivel_list' %}">Nivel Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'appjardin_nivel_list' %}">Nivel Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -16,5 +16,5 @@
     <td>{{ object.nombre }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'app_name_nivel_create' %}">Create new Nivel</a>
+</table><a class="btn btn-primary" href="{% url 'appjardin_nivel_create' %}">Create new Nivel</a>
 {% endblock %}

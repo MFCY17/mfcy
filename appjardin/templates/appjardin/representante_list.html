@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'app_name_representante_list' %}">Representante Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'appjardin_representante_list' %}">Representante Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -18,5 +18,5 @@
     <td>{{ object.correo }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'app_name_representante_create' %}">Create new Representante</a>
+</table><a class="btn btn-primary" href="{% url 'appjardin_representante_create' %}">Create new Representante</a>
 {% endblock %}

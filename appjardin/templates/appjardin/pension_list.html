@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'app_name_pension_list' %}">Pension Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'appjardin_pension_list' %}">Pension Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -16,5 +16,5 @@
     <td>{{ object.costo }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'app_name_pension_create' %}">Create new Pension</a>
+</table><a class="btn btn-primary" href="{% url 'appjardin_pension_create' %}">Create new Pension</a>
 {% endblock %}

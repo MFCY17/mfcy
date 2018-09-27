@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'app_name_matricula_list' %}">Matricula Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'appjardin_matricula_list' %}">Matricula Listing</a></p>
 <form method="post">
 {% csrf_token %}
 {{form|crispy}}

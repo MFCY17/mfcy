@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'app_name_matricula_list' %}">Matricula Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'appjardin_matricula_list' %}">Matricula Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -18,5 +18,5 @@
     <td>{{ object.fecha }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'app_name_matricula_create' %}">Create new Matricula</a>
+</table><a class="btn btn-primary" href="{% url 'appjardin_matricula_create' %}">Create new Matricula</a>
 {% endblock %}
