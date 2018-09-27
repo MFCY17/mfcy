@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'appjardin_estudiante_list' %}">Estudiante Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'appjardin_estudiante_list' %}">Estudiante Listar</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -20,5 +20,5 @@
     <td>{{ object.id_secretaria }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'appjardin_estudiante_create' %}">Create new Estudiante</a>
+</table><a class="btn btn-primary" href="{% url 'appjardin_estudiante_create' %}">Crear nuevo Estudiante</a>
 {% endblock %}

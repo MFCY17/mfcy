@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'appjardin_paralelo_list' %}">Paralelo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'appjardin_paralelo_list' %}">Paralelo Listar</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -14,5 +14,5 @@
     <td>{{ object.id_paralelo }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'appjardin_paralelo_create' %}">Create new Paralelo</a>
+</table><a class="btn btn-primary" href="{% url 'appjardin_paralelo_create' %}">Crear nuevo Paralelo</a>
 {% endblock %}

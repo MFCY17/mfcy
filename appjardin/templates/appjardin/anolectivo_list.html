@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'appjardin_anolectivo_list' %}">Anolectivo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'appjardin_anolectivo_list' %}">Anolectivo Listar</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -18,5 +18,5 @@
     <td>{{ object.estado }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'appjardin_anolectivo_create' %}">Create new Anolectivo</a>
+</table><a class="btn btn-primary" href="{% url 'appjardin_anolectivo_create' %}">Crear nuevo Anolectivo</a>
 {% endblock %}

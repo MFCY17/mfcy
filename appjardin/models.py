@@ -179,10 +179,10 @@ class Matricula(models.Model):
 
     # Relationship Fields    
     id_preinscripcion = models.ForeignKey('Preinscripcion',
-        db_column='id_preinscripcion', on_delete=models.CASCADE
+        db_column='id_preinscripcion', on_delete=models.CASCADE, verbose_name = 'Preinscripcion'
     )
     id_paralelo = models.ForeignKey('Paralelo',
-        db_column='id_paralelo', on_delete=models.CASCADE
+        db_column='id_paralelo', on_delete=models.CASCADE, verbose_name = 'Paralelo'
     )
 
     class Meta:
@@ -208,10 +208,11 @@ class Nivel(models.Model):
 
     # Relationship Fields
     id_anolectivo = models.ForeignKey('Anolectivo',
-        db_column='id_anolectivo', on_delete=models.CASCADE
+        db_column='id_anolectivo', on_delete=models.CASCADE, verbose_name = 'Año Lectivo'
     )
 
     class Meta:
+        verbose_name_plural = "Niveles"
         ordering = ('-pk',)
         db_table = 'nivel'
 
