@@ -140,15 +140,16 @@
                         <a href="#" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i>Inicio</a>                        
                     </li>
                     <li>
-                      <a href="" class="waves-effect"><i class="fa fa-child fa-fw"></i><span class="hide-menu">Artista <span class="fa arrow"></span></span></a>
+                      <a href="" class="waves-effect"><i class="fa fa-child fa-fw"></i><span class="hide-menu">Alumnos <span class="fa arrow"></span></span></a>
                       <ul class="nav nav-second-level">
-                          <li><a href="#" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Registrarme</a></li>
-                          <!-- <li><a href="" class="waves-effect"><i class="fa fa-search fa-fw" aria-hidden="true"></i>Mis Ofertas</a></li>
-                          <li><a href="" class="waves-effect"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>Crear</a></li> -->
+                          <li><a href="#" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Registrar</a></li>
+                          <li><a href="#" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
+                          <li><a href="#" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Eliminar</a></li>
+                         
                         </ul>
                     </li>
                     <li>
-                      <a href="" class="waves-effect"><i class="fa fa-users fa-fw"></i><span class="hide-menu">Grupo Musical <span class="fa arrow"></span></span></a>
+                      <a href="" class="waves-effect"><i class="fa fa-users fa-fw"></i><span class="hide-menu">Preinscripciones <span class="fa arrow"></span></span></a>
                       <ul class="nav nav-second-level">
                           <li><a href="#" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Añadir</a></li>
                           {% for c in grupos_registrados %}
@@ -158,10 +159,18 @@
                           <li><a href="" class="waves-effect"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>Crear</a></li> -->
                         </ul>
                     </li>
-                   
-                     <li>
-                        <a href="#" class="waves-effect"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>Calendario</a>
-                    </li>
+                    <li>
+                      <a href="" class="waves-effect"><i class="fa fa-users fa-fw"></i><span class="hide-menu">Matrículas <span class="fa arrow"></span></span></a>
+                      <ul class="nav nav-second-level">
+                          <li><a href="#" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Añadir</a></li>
+                          {% for c in grupos_registrados %}
+                          <li><a href="#}" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Editar {{c.nombre_banda}}</a></li>
+                          {% endfor %}
+                          <!-- <li><a href="" class="waves-effect"><i class="fa fa-search fa-fw" aria-hidden="true"></i>Mis Ofertas</a></li>
+                          <li><a href="" class="waves-effect"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>Crear</a></li> -->
+                        </ul>
+                    </li>                   
+                    
                     
                     
                     <!-- <li>
@@ -209,9 +218,9 @@
              </div>
 
         <footer class="footer text-center">&copy;
-          <a href="http://deosgym.solnustec.com/" title="DEOS GYM">LOJA ES MÚSICA</a>
-           2017 | DEVELOPED BY:
-           <a href="https://solnustec.com/" title="SOLNUS - MEGALEIO" target="_blank">solnus</a>
+          <a href="#" title="DEOS GYM">My little Friends</a>
+           2018
+           
          </footer>
     </div>
 

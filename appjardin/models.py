@@ -14,7 +14,7 @@ from django_extensions.db import fields as extension_fields
 class Anolectivo(models.Model):
 
     # Fields
-    id_anolectivo = AutoField(primary_key=True)
+    id_anolectivo = AutoField(primary_key=True, verbose_name="ID Año Lectivo")
     nombre = CharField(max_length=100)
     estado = BooleanField()
 
@@ -23,8 +23,8 @@ class Anolectivo(models.Model):
         ordering = ('-pk',)
         db_table = 'anolectivo'
 
-    def __unicode__(self):
-        return u'%s' % self.pk
+    def __str__(self):
+        return u'%s' % self.nombre
 
     def get_absolute_url(self):
         return reverse('appjardin_anolectivo_detail', args=(self.pk,))
@@ -159,7 +159,7 @@ class Estudiante(models.Model):
         ordering = ('-pk',)
         db_table = 'estudiante'
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
@@ -189,7 +189,7 @@ class Matricula(models.Model):
         ordering = ('-pk',)
         db_table = 'matricula'
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
@@ -216,7 +216,7 @@ class Nivel(models.Model):
         ordering = ('-pk',)
         db_table = 'nivel'
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
@@ -241,7 +241,7 @@ class Paralelo(models.Model):
         ordering = ('-pk',)
         db_table = 'paralelo'
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
@@ -267,7 +267,7 @@ class Pension(models.Model):
         ordering = ('-pk',)
         db_table = 'pension'
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
@@ -302,7 +302,7 @@ class Preinscripcion(models.Model):
         ordering = ('-pk',)
         db_table = 'preinscripcion'
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
@@ -328,7 +328,7 @@ class Profesor(models.Model):
         ordering = ('-pk',)
         db_table = 'profesor'
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
@@ -353,7 +353,7 @@ class Representante(models.Model):
         ordering = ('-pk',)
         db_table = 'representante'
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
@@ -381,7 +381,7 @@ class Representanteestudiante(models.Model):
         ordering = ('-pk',)
         db_table = 'representanteestudiante'
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
@@ -406,7 +406,7 @@ class Rol(models.Model):
         ordering = ('-pk',)
         db_table = 'rol'
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
@@ -430,7 +430,7 @@ class Secretaria(models.Model):
         ordering = ('-pk',)
         db_table = 'secretaria'
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
