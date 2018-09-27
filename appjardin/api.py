@@ -75,14 +75,6 @@ class RepresentanteViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class RepresentanteestudianteViewSet(viewsets.ModelViewSet):
-    """ViewSet for the Representanteestudiante class"""
-
-    queryset = models.Representanteestudiante.objects.all()
-    serializer_class = serializers.RepresentanteestudianteSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
 class RolViewSet(viewsets.ModelViewSet):
     """ViewSet for the Rol class"""
 
@@ -97,5 +89,3 @@ class SecretariaViewSet(viewsets.ModelViewSet):
     queryset = models.Secretaria.objects.all()
     serializer_class = serializers.SecretariaSerializer
     permission_classes = [permissions.IsAuthenticated]
-
-

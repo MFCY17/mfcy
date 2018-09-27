@@ -66,18 +66,24 @@ class AuthPermission(models.Model):
 class AuthUser(models.Model):
     password = models.CharField(max_length=128)
     last_login = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.BooleanField()
+    is_superuser = models.BooleanField(default=False)
     username = models.CharField(unique=True, max_length=150)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.CharField(max_length=254)
-    is_staff = models.BooleanField()
-    is_active = models.BooleanField()
-    date_joined = models.DateTimeField()
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(blank=True, null=True)
+    cedula = models.CharField(max_length=30,blank=True, null=True)
+    genero = models.CharField(max_length=30,blank=True, null=True)
+    direccion = models.CharField(max_length=200,blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'auth_user'
+
+    def __str__(self):
+        return u'%s %s' % (self.first_name, self.last_name)
 
 
 class AuthUserGroups(models.Model):
@@ -154,13 +160,16 @@ class Estudiante(models.Model):
 
     # Relationship Fields
     id = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='id')
+    id_representante = models.ForeignKey('Representante',
+        db_column='id_representante', on_delete=models.CASCADE
+    )
 
     class Meta:
         ordering = ('-pk',)
         db_table = 'estudiante'
 
     def __str__(self):
-        return u'%s' % self.pk
+        return u'%s %s' % (self.id.first_name, self.id.last_name)
 
     def get_absolute_url(self):
         return reverse('appjardin_estudiante_detail', args=(self.pk,))
@@ -175,9 +184,9 @@ class Matricula(models.Model):
     # Fields
     id_matricula = AutoField(primary_key=True)
     costo = FloatField()
-    fecha = DateTimeField()
+    fecha = DateTimeField(auto_now_add=True)
 
-    # Relationship Fields    
+    # Relationship Fields
     id_preinscripcion = models.ForeignKey('Preinscripcion',
         db_column='id_preinscripcion', on_delete=models.CASCADE, verbose_name = 'Preinscripcion'
     )
@@ -190,7 +199,7 @@ class Matricula(models.Model):
         db_table = 'matricula'
 
     def __str__(self):
-        return u'%s' % self.pk
+        return u'Est: %s' % self.id_preinscripcion.id_estudiante.id
 
     def get_absolute_url(self):
         return reverse('appjardin_matricula_detail', args=(self.pk,))
@@ -217,7 +226,7 @@ class Nivel(models.Model):
         db_table = 'nivel'
 
     def __str__(self):
-        return u'%s' % self.pk
+        return u'%s' % self.nombre
 
     def get_absolute_url(self):
         return reverse('appjardin_nivel_detail', args=(self.pk,))
@@ -242,7 +251,7 @@ class Paralelo(models.Model):
         db_table = 'paralelo'
 
     def __str__(self):
-        return u'%s' % self.pk
+        return u'Prof. %s' % self.id_profesor.id
 
     def get_absolute_url(self):
         return reverse('appjardin_paralelo_detail', args=(self.pk,))
@@ -268,7 +277,7 @@ class Pension(models.Model):
         db_table = 'pension'
 
     def __str__(self):
-        return u'%s' % self.pk
+        return u'%s' % self.id_matricula
 
     def get_absolute_url(self):
         return reverse('appjardin_pension_detail', args=(self.pk,))
@@ -282,7 +291,7 @@ class Preinscripcion(models.Model):
 
     # Fields
     id_preinscripcion = AutoField(primary_key=True)
-    fecha = DateTimeField()
+    fecha = DateTimeField(auto_now_add=True)
 
     # Relationship Fields
     id_estudiante = ForeignKey('Estudiante',
@@ -303,7 +312,7 @@ class Preinscripcion(models.Model):
         db_table = 'preinscripcion'
 
     def __str__(self):
-        return u'%s' % self.pk
+        return u'Pre: %s' % self.id_estudiante.id
 
     def get_absolute_url(self):
         return reverse('appjardin_preinscripcion_detail', args=(self.pk,))
@@ -314,6 +323,7 @@ class Preinscripcion(models.Model):
 
 
 class Profesor(models.Model):
+
 
     # Fields
     id_profesor = AutoField(primary_key=True)
@@ -329,7 +339,7 @@ class Profesor(models.Model):
         db_table = 'profesor'
 
     def __str__(self):
-        return u'%s' % self.pk
+        return u'%s %s' % (self.id.first_name, self.id.last_name)
 
     def get_absolute_url(self):
         return reverse('appjardin_profesor_detail', args=(self.pk,))
@@ -354,7 +364,7 @@ class Representante(models.Model):
         db_table = 'representante'
 
     def __str__(self):
-        return u'%s' % self.pk
+        return u'%s %s' % (self.id.first_name, self.id.last_name)
 
     def get_absolute_url(self):
         return reverse('appjardin_representante_detail', args=(self.pk,))
@@ -362,34 +372,6 @@ class Representante(models.Model):
 
     def get_update_url(self):
         return reverse('appjardin_representante_update', args=(self.pk,))
-
-
-class Representanteestudiante(models.Model):
-
-    # Fields
-    id_representanteestudiante = AutoField(primary_key=True)
-
-    # Relationship Fields
-    id_estudiante = ForeignKey(Estudiante,
-        db_column='id_estudiante', on_delete=models.CASCADE
-    )
-    id_representante = ForeignKey(Representante,
-        db_column='id_representante', on_delete=models.CASCADE
-    )
-
-    class Meta:
-        ordering = ('-pk',)
-        db_table = 'representanteestudiante'
-
-    def __str__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('appjardin_representanteestudiante_detail', args=(self.pk,))
-
-
-    def get_update_url(self):
-        return reverse('appjardin_representanteestudiante_update', args=(self.pk,))
 
 
 class Rol(models.Model):
@@ -431,7 +413,7 @@ class Secretaria(models.Model):
         db_table = 'secretaria'
 
     def __str__(self):
-        return u'%s' % self.pk
+        return u'%s %s' % (self.id.first_name, self.id.last_name)
 
     def get_absolute_url(self):
         return reverse('appjardin_secretaria_detail', args=(self.pk,))

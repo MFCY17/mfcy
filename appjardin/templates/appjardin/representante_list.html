@@ -12,8 +12,8 @@
 {% for object in object_list %}
 <tr>
     <td>{{object.pk}}</td>
-    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-    <td>{{ object.id_representante }}</td>
+    <td><a href="{{object.get_absolute_url}}">Editar</a></td>
+    <td>{{ object.id.first_name }} {{ object.id.last_name }}</td>
     <td>{{ object.celular }}</td>
     <td>{{ object.correo }}</td>
 </tr>

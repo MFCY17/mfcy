@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from . import api
 from . import views
+from django.views.generic.base import TemplateView
 
 router = routers.DefaultRouter()
 router.register(r'anolectivo', api.AnolectivoViewSet)
@@ -15,7 +16,6 @@ router.register(r'pension', api.PensionViewSet)
 router.register(r'preinscripcion', api.PreinscripcionViewSet)
 router.register(r'profesor', api.ProfesorViewSet)
 router.register(r'representante', api.RepresentanteViewSet)
-router.register(r'representanteestudiante', api.RepresentanteestudianteViewSet)
 router.register(r'rol', api.RolViewSet)
 router.register(r'secretaria', api.SecretariaViewSet)
 
@@ -23,6 +23,11 @@ router.register(r'secretaria', api.SecretariaViewSet)
 urlpatterns = (
     # urls for Django Rest Framework API
     url(r'^api/v1/', include(router.urls)),
+    url(r'inicio/$', TemplateView.as_view(template_name='base.html'), name ='inicio'),
+    url(r'^rol/$', views.RolesCreate, name='RolesCreate'),
+    url(r'^representante/estudiantes/$', views.representante_estudiante, name='representante_estudiante'),
+    url(r'^profesores/estudiante$', views.estudiante_profesores, name='estudiante_profesores'),
+
 )
 
 urlpatterns += (
@@ -36,7 +41,7 @@ urlpatterns += (
 urlpatterns += (
     # urls for Estudiante
     url(r'^appjardin/estudiante/$', views.EstudianteListView.as_view(), name='appjardin_estudiante_list'),
-    url(r'^appjardin/estudiante/create/$', views.EstudianteCreateView.as_view(), name='appjardin_estudiante_create'),
+    url(r'^appjardin/estudiante/create/$', views.AlummoCreate, name='appjardin_estudiante_create'),
     url(r'^appjardin/estudiante/detail/(?P<pk>\S+)/$', views.EstudianteDetailView.as_view(), name='appjardin_estudiante_detail'),
     url(r'^appjardin/estudiante/update/(?P<pk>\S+)/$', views.EstudianteUpdateView.as_view(), name='appjardin_estudiante_update'),
 )
@@ -84,7 +89,7 @@ urlpatterns += (
 urlpatterns += (
     # urls for Profesor
     url(r'^appjardin/profesor/$', views.ProfesorListView.as_view(), name='appjardin_profesor_list'),
-    url(r'^appjardin/profesor/create/$', views.ProfesorCreateView.as_view(), name='appjardin_profesor_create'),
+    url(r'^appjardin/profesor/create/$', views.ProfesoresCreate, name='appjardin_profesor_create'),
     url(r'^appjardin/profesor/detail/(?P<pk>\S+)/$', views.ProfesorDetailView.as_view(), name='appjardin_profesor_detail'),
     url(r'^appjardin/profesor/update/(?P<pk>\S+)/$', views.ProfesorUpdateView.as_view(), name='appjardin_profesor_update'),
 )
@@ -92,17 +97,9 @@ urlpatterns += (
 urlpatterns += (
     # urls for Representante
     url(r'^appjardin/representante/$', views.RepresentanteListView.as_view(), name='appjardin_representante_list'),
-    url(r'^appjardin/representante/create/$', views.RepresentanteCreateView.as_view(), name='appjardin_representante_create'),
+    url(r'^appjardin/representante/create/$', views.RepresentanteCreateView, name='appjardin_representante_create'),
     url(r'^appjardin/representante/detail/(?P<pk>\S+)/$', views.RepresentanteDetailView.as_view(), name='appjardin_representante_detail'),
     url(r'^appjardin/representante/update/(?P<pk>\S+)/$', views.RepresentanteUpdateView.as_view(), name='appjardin_representante_update'),
-)
-
-urlpatterns += (
-    # urls for Representanteestudiante
-    url(r'^appjardin/representanteestudiante/$', views.RepresentanteestudianteListView.as_view(), name='appjardin_representanteestudiante_list'),
-    url(r'^appjardin/representanteestudiante/create/$', views.RepresentanteestudianteCreateView.as_view(), name='appjardin_representanteestudiante_create'),
-    url(r'^appjardin/representanteestudiante/detail/(?P<pk>\S+)/$', views.RepresentanteestudianteDetailView.as_view(), name='appjardin_representanteestudiante_detail'),
-    url(r'^appjardin/representanteestudiante/update/(?P<pk>\S+)/$', views.RepresentanteestudianteUpdateView.as_view(), name='appjardin_representanteestudiante_update'),
 )
 
 urlpatterns += (
@@ -124,5 +121,5 @@ urlpatterns += (
 # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # urlpatterns += [
-# 	url(r'^$', views.index, name='index'),	
+# 	url(r'^$', views.index, name='index'),
 # ]

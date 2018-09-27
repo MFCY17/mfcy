@@ -1,0 +1,11 @@
+anyjson==0.3.3
+Django==1.11.15
+django-admin-generator==2.1.0
+django-crispy-forms==1.7.2
+django-extensions==2.1.2
+django-utils2==2.5.0
+djangorestframework==3.8.2
+psycopg2==2.7.5
+python-utils==2.3.0
+pytz==2018.5
+six==1.11.0

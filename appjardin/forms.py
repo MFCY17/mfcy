@@ -1,23 +1,39 @@
 from django import forms
-from .models import Anolectivo, Estudiante, Matricula, Nivel, Paralelo, Pension, Preinscripcion, Profesor, Representante, Representanteestudiante, Rol, Secretaria
+from .models import Anolectivo, Estudiante, Matricula, Nivel, Paralelo, Pension, Preinscripcion, AuthUser, Profesor, Representante, Rol, Secretaria
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+class SignUpForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
+    last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
 class AnolectivoForm(forms.ModelForm):
     class Meta:
         model = Anolectivo
         fields = ['id_anolectivo', 'nombre', 'estado']
 
+class AuthUserForm(forms.ModelForm):
+    class Meta:
+        model = AuthUser
+        fields = ['password', 'username', 'first_name', 'last_name', 'email', 'cedula', 'genero', 'direccion']
+
 
 class EstudianteForm(forms.ModelForm):
     class Meta:
         model = Estudiante
-        fields = ['id_estudiante', 'tipo_sangre', 'alergias', 'id_secretaria', 'id']
+        fields = ['id_estudiante', 'tipo_sangre', 'alergias', 'id_secretaria','id_representante']
 
 
 class MatriculaForm(forms.ModelForm):
     class Meta:
         model = Matricula
-        fields = ['id_matricula', 'costo', 'fecha', 'id_preinscripcion', 'id_paralelo']
+        fields = ['id_matricula', 'costo', 'id_preinscripcion', 'id_paralelo']
 
 
 class NivelForm(forms.ModelForm):
@@ -41,25 +57,19 @@ class PensionForm(forms.ModelForm):
 class PreinscripcionForm(forms.ModelForm):
     class Meta:
         model = Preinscripcion
-        fields = ['id_preinscripcion', 'fecha', 'id_estudiante', 'id_representante', 'id_nivel', 'id_secretaria']
+        fields = ['id_preinscripcion', 'id_estudiante', 'id_representante', 'id_nivel', 'id_secretaria']
 
 
 class ProfesorForm(forms.ModelForm):
     class Meta:
         model = Profesor
-        fields = ['id_profesor', 'titulo_profesor', 'celular', 'estado_civil', 'id']
+        fields = ['id_profesor', 'titulo_profesor', 'celular', 'estado_civil']
 
 
 class RepresentanteForm(forms.ModelForm):
     class Meta:
         model = Representante
-        fields = ['id_representante', 'celular', 'correo', 'id']
-
-
-class RepresentanteestudianteForm(forms.ModelForm):
-    class Meta:
-        model = Representanteestudiante
-        fields = ['id_representanteestudiante', 'id_estudiante', 'id_representante']
+        fields = ['id_representante', 'celular', 'correo']
 
 
 class RolForm(forms.ModelForm):
@@ -71,6 +81,4 @@ class RolForm(forms.ModelForm):
 class SecretariaForm(forms.ModelForm):
     class Meta:
         model = Secretaria
-        fields = ['id_secretaria', 'fecha_ingreso', 'id']
-
-
+        fields = ['id_secretaria', 'fecha_ingreso']

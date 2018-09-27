@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" sizes="16x16" href="{%static 'images/logo_morado.png'%}">
-    <title>Loja es música</title>
+    <title>Mi Little Friends</title>
     <!-- Bootstrap Core CSS -->
 
     <link href="{%static 'wp-admin/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -103,7 +103,7 @@
                             <li role="separator" class="divider"></li>
                             <li><a href="#"><i class="ti-settings"></i>Editar Perfil</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href=""><i class="fa fa-power-off"></i> Cerrar Sesion</a></li>
+                            <li><a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Cerrar Sesion</a></li>
                         </ul>
                     </li>
 
@@ -130,49 +130,113 @@
                         </a>
                         </div>
                         <div class="col-md-8">
-                            <p style="line-height: 20px;" >{{datos_persona.first_name|title}} {{datos_persona.last_name|title}}</p>
-                            <p style="line-height: 10px;">{{datos_persona.username}}</p>                            
+                            <p style="line-height: 20px;" >{{request.user.first_name|title}} {{request.user.last_name|title}}</p>
+                            <p style="line-height: 10px;">{{request.user.username}}</p>
                         </div>
 
                     </li>
                     <hr>
                     <li style="padding: 0px 0 0;">
-                        <a href="#" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i>Inicio</a>                        
+                        <a href="{% url 'inicio' %}" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i>Inicio</a>
+                    </li>
+                    {% if request.user.is_superuser %}
+                    <li>
+                      <a href="" class="waves-effect"><i class="fa fa-child fa-fw"></i><span class="hide-menu">Secretaria <span class="fa arrow"></span></span></a>
+                      <ul class="nav nav-second-level">
+                        <li><a href="{% url 'RolesCreate' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Añadir</a></li>
+                        <li><a href="{% url 'appjardin_secretaria_list' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                      <a href="" class="waves-effect"><i class="fa fa-child fa-fw"></i><span class="hide-menu">Profesor<span class="fa arrow"></span></span></a>
+                      <ul class="nav nav-second-level">
+                        <li><a href="{% url 'appjardin_profesor_create' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Añadir</a></li>
+                        <li><a href="{% url 'appjardin_profesor_list' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    <!-- Secretaria -->
+                    {% if request.user.secretaria or request.user.is_superuser %}
+                    <li>
+                      <a href="" class="waves-effect"><i class="fa fa-child fa-fw"></i><span class="hide-menu">Pension <span class="fa arrow"></span></span></a>
+                      <ul class="nav nav-second-level">
+                          <li><a href="{% url 'appjardin_pension_create' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Registrar</a></li>
+                          <li><a href="{% url 'appjardin_pension_list' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                      <a href="" class="waves-effect"><i class="fa fa-child fa-fw"></i><span class="hide-menu">Año Lectivo <span class="fa arrow"></span></span></a>
+                      <ul class="nav nav-second-level">
+                          <li><a href="{% url 'appjardin_anolectivo_create' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Registrar</a></li>
+                          <li><a href="{% url 'appjardin_anolectivo_list' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                      <a href="" class="waves-effect"><i class="fa fa-child fa-fw"></i><span class="hide-menu">Paralelos <span class="fa arrow"></span></span></a>
+                      <ul class="nav nav-second-level">
+                          <li><a href="{% url 'appjardin_paralelo_create' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Registrar</a></li>
+                          <li><a href="{% url 'appjardin_paralelo_list' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                      <a href="" class="waves-effect"><i class="fa fa-child fa-fw"></i><span class="hide-menu">Niveles <span class="fa arrow"></span></span></a>
+                      <ul class="nav nav-second-level">
+                          <li><a href="{% url 'appjardin_nivel_create' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Registrar</a></li>
+                          <li><a href="{% url 'appjardin_nivel_list' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
+                        </ul>
                     </li>
                     <li>
                       <a href="" class="waves-effect"><i class="fa fa-child fa-fw"></i><span class="hide-menu">Alumnos <span class="fa arrow"></span></span></a>
                       <ul class="nav nav-second-level">
-                          <li><a href="#" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Registrar</a></li>
-                          <li><a href="#" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
-                          <li><a href="#" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Eliminar</a></li>
-                         
+                          <li><a href="{% url 'appjardin_estudiante_create' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Registrar</a></li>
+                          <li><a href="{% url 'appjardin_estudiante_list' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
                         </ul>
                     </li>
                     <li>
                       <a href="" class="waves-effect"><i class="fa fa-users fa-fw"></i><span class="hide-menu">Preinscripciones <span class="fa arrow"></span></span></a>
                       <ul class="nav nav-second-level">
-                          <li><a href="#" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Añadir</a></li>
-                          {% for c in grupos_registrados %}
-                          <li><a href="#}" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Editar {{c.nombre_banda}}</a></li>
-                          {% endfor %}
-                          <!-- <li><a href="" class="waves-effect"><i class="fa fa-search fa-fw" aria-hidden="true"></i>Mis Ofertas</a></li>
-                          <li><a href="" class="waves-effect"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>Crear</a></li> -->
+                        <li><a href="{% url 'appjardin_preinscripcion_create' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Añadir</a></li>
+                        <li><a href="{% url 'appjardin_preinscripcion_list' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
                         </ul>
                     </li>
                     <li>
                       <a href="" class="waves-effect"><i class="fa fa-users fa-fw"></i><span class="hide-menu">Matrículas <span class="fa arrow"></span></span></a>
                       <ul class="nav nav-second-level">
-                          <li><a href="#" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Añadir</a></li>
-                          {% for c in grupos_registrados %}
-                          <li><a href="#}" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Editar {{c.nombre_banda}}</a></li>
-                          {% endfor %}
-                          <!-- <li><a href="" class="waves-effect"><i class="fa fa-search fa-fw" aria-hidden="true"></i>Mis Ofertas</a></li>
-                          <li><a href="" class="waves-effect"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>Crear</a></li> -->
+                          <li><a href="{% url 'appjardin_matricula_create' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Añadir</a></li>
+                          <li><a href="{% url 'appjardin_matricula_list' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
                         </ul>
-                    </li>                   
-                    
-                    
-                    
+                    </li>
+
+                    <li>
+                      <a href="" class="waves-effect"><i class="fa fa-users fa-fw"></i><span class="hide-menu">Representantes <span class="fa arrow"></span></span></a>
+                      <ul class="nav nav-second-level">
+                        <li><a href="{% url 'appjardin_representante_create' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Añadir</a></li>
+                        <li><a href="{% url 'appjardin_representante_list' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% if request.user.representante %}
+                    <li role="separator" class="divider"></li>
+                    <li>
+                      <a href="" class="waves-effect"><i class="fa fa-users fa-fw"></i><span class="hide-menu">Estudiantes <span class="fa arrow"></span></span></a>
+                      <ul class="nav nav-second-level">
+                        <li><a href="{% url 'representante_estudiante' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar</a></li>
+
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% if request.user.profesor %}
+                    <li role="separator" class="divider"></li>
+                    <li>
+                      <a href="" class="waves-effect"><i class="fa fa-users fa-fw"></i><span class="hide-menu">Estudiantes <span class="fa arrow"></span></span></a>
+                      <ul class="nav nav-second-level">
+                        <li><a href="{% url 'estudiante_profesores' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar</a></li>
+
+                        </ul>
+                    </li>
+                    {% endif %}
+
+
                     <!-- <li>
                         <a href="#?" class="waves-effect"><i class="fa fa-history fa-fw" data-icon="v"></i><span class="hide-menu">Instituciones<span class="fa arrow"></span> </span></a>
                         <ul class="nav nav-second-level">
@@ -191,7 +255,7 @@
                         <a href="" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Lista de usuarios</a>
                     </li> -->
                     <li>
-                        <a href="accounts/logout" class="waves-effect"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>Cerrar Sesion</a>
+                        <a href="{% url 'logout' %}" class="waves-effect"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>Cerrar Sesion</a>
                     </li>
 
                 </ul>
@@ -205,11 +269,12 @@
                  {% block content %}
                  <div style="width: 100%;">
                     <center style="right: -2%;">
+                    <br><br><br>
                     <a href="#"><img style="position: relative; top: -20%; transform: translateY(20%);" src="{%static 'images/logo_morado.png'%}" class="img-responsive" width="20%" alt="Logo principal"></a>
                     <br><br><br>
                     <h2><strong>BIENVENIDO</strong></h2>
-                    <p><small>Gracias por formar parte de la plataforma musical más grande del País.</small></p>
-                    <a href="#"><strong><i class="fa fa-edit fa-fw" aria-hidden="true"></i> REGISTRARME</strong></a>
+                    <br>
+
                     </center>
                  </div>
                  {%endblock%}
@@ -220,7 +285,7 @@
         <footer class="footer text-center">&copy;
           <a href="#" title="DEOS GYM">My little Friends</a>
            2018
-           
+
          </footer>
     </div>
 
@@ -251,7 +316,7 @@
     <script src="{% static 'wp-admin/js/custom.min.js' %}"></script>
     <script src="{% static 'wp-admin/js/dashboard1.js' %}"></script>
     <script src="{% static 'wp-admin/plugins/toast-master/js/jquery.toast.js' %}"></script>
-    <!-- Multiselect -->    
+    <!-- Multiselect -->
     <script src="{% static 'wp-admin/plugins/custom-select/custom-select.js' %}"></script>
     <script src="{% static 'wp-admin/plugins/custom-select/validador.js' %}"></script>
     <!-- E MODAL -->

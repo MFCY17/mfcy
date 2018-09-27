@@ -1,7 +1,104 @@
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
-from .models import Anolectivo, Estudiante, Matricula, Nivel, Paralelo, Pension, Preinscripcion, Profesor, Representante, Representanteestudiante, Rol, Secretaria
-from .forms import AnolectivoForm, EstudianteForm, MatriculaForm, NivelForm, ParaleloForm, PensionForm, PreinscripcionForm, ProfesorForm, RepresentanteForm, RepresentanteestudianteForm, RolForm, SecretariaForm
+from django.shortcuts import render
+from django.shortcuts import redirect
+from django.contrib.auth.models import User
+from .models import *
+from .forms import *
+from django.contrib.auth.decorators  import  login_required
+from django.utils.decorators  import  method_decorator
 
+
+@login_required(login_url='/login/')
+def representante_estudiante(request):
+    est = Matricula.objects.filter(id_preinscripcion__id_estudiante__id_representante__id=request.user.id).order_by('pk')
+    ctx = {'object_list':est}
+    return render(request,'representantes_estudiantes.html',ctx)
+
+@login_required(login_url='/login/')
+def estudiante_profesores(request):
+    est = Matricula.objects.filter(id_paralelo__id_profesor__id=request.user.id).order_by('pk')
+    ctx = {'object_list':est}
+    return render(request,'estudiantes_profesores.html',ctx)
+
+@login_required(login_url='/login/')
+def RolesCreate(request):
+    if request.method == 'POST':
+        form = AuthUserForm(request.POST)
+        formS = SecretariaForm(request.POST)
+        if form.is_valid():
+            if formS.is_valid():
+                utl = form.save()
+                auth = User.objects.get(pk = utl.pk)
+                auth.set_password(utl.password)
+                auth.save()
+                formR = formS.save(commit=False)
+                formR.id = AuthUser.objects.get(id = utl.pk)
+                formR.save()
+                return redirect('appjardin_representante_create')
+    else:
+        form = AuthUserForm()
+        formS = SecretariaForm()
+    return render(request, 'appjardin/secretaria_form.html', {'form': form,'formS':formS})
+
+@login_required(login_url='/login/')
+def ProfesoresCreate(request):
+    if request.method == 'POST':
+        form = AuthUserForm(request.POST)
+        formS = ProfesorForm(request.POST)
+        if form.is_valid():
+            if formS.is_valid():
+                utl = form.save()
+                auth = User.objects.get(pk = utl.pk)
+                auth.set_password(utl.password)
+                auth.save()
+                formR = formS.save(commit=False)
+                formR.id = AuthUser.objects.get(id = utl.pk)
+                formR.save()
+                return redirect('appjardin_profesor_create')
+    else:
+        form = AuthUserForm()
+        formS = ProfesorForm()
+    return render(request, 'appjardin/profesor_form.html', {'form': form,'formS':formS})
+
+@login_required(login_url='/login/')
+def AlummoCreate(request):
+    if request.method == 'POST':
+        form = AuthUserForm(request.POST)
+        formS = EstudianteForm(request.POST)
+        if form.is_valid():
+            if formS.is_valid():
+                utl = form.save()
+                auth = User.objects.get(pk = utl.pk)
+                auth.set_password(utl.password)
+                auth.save()
+                formR = formS.save(commit=False)
+                formR.id = AuthUser.objects.get(id = utl.pk)
+                formR.save()
+                return redirect('appjardin_estudiante_create')
+    else:
+        form = AuthUserForm()
+        formS = EstudianteForm()
+    return render(request, 'appjardin/estudiante_form.html', {'form': form,'formS':formS})
+
+@login_required(login_url='/login/')
+def RepresentanteCreateView(request):
+    if request.method == 'POST':
+        form = AuthUserForm(request.POST)
+        formS = RepresentanteForm(request.POST)
+        if form.is_valid():
+            if formS.is_valid():
+                utl = form.save()
+                auth = User.objects.get(pk = utl.pk)
+                auth.set_password(utl.password)
+                auth.save()
+                formR = formS.save(commit=False)
+                formR.id = AuthUser.objects.get(id = utl.pk)
+                formR.save()
+                return redirect('appjardin_representante_create')
+    else:
+        form = AuthUserForm()
+        formS = RepresentanteForm()
+    return render(request, 'appjardin/representante_form.html', {'form': form,'formS':formS})
 
 class AnolectivoListView(ListView):
     model = Anolectivo
@@ -151,9 +248,7 @@ class RepresentanteListView(ListView):
     model = Representante
 
 
-class RepresentanteCreateView(CreateView):
-    model = Representante
-    form_class = RepresentanteForm
+
 
 
 class RepresentanteDetailView(DetailView):
@@ -163,24 +258,6 @@ class RepresentanteDetailView(DetailView):
 class RepresentanteUpdateView(UpdateView):
     model = Representante
     form_class = RepresentanteForm
-
-
-class RepresentanteestudianteListView(ListView):
-    model = Representanteestudiante
-
-
-class RepresentanteestudianteCreateView(CreateView):
-    model = Representanteestudiante
-    form_class = RepresentanteestudianteForm
-
-
-class RepresentanteestudianteDetailView(DetailView):
-    model = Representanteestudiante
-
-
-class RepresentanteestudianteUpdateView(UpdateView):
-    model = Representanteestudiante
-    form_class = RepresentanteestudianteForm
 
 
 class RolListView(ListView):
@@ -217,4 +294,3 @@ class SecretariaDetailView(DetailView):
 class SecretariaUpdateView(UpdateView):
     model = Secretaria
     form_class = SecretariaForm
-

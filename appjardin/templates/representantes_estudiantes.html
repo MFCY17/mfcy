@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<table class="table">
+<tr>
+    <td>ID</td>
+    <td>Estudiante</td>
+    <td>Profesor Asig</td>
+    <td>costo</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{object.id_preinscripcion.id_estudiante}}</td>
+    <td>{{object.id_paralelo.id_profesor}}</td>
+    <td>{{ object.costo }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

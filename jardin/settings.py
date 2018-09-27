@@ -51,7 +51,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'appjardin.middleware.UserTZMiddleware',
 ]
 
 ROOT_URLCONF = 'jardin.urls'
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'jardin.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'appjardin/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,10 +81,10 @@ WSGI_APPLICATION = 'jardin.wsgi.application'
 
 DATABASES = {
     'default': {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',    
-    'NAME': 'jardin',    
-    'USER': 'postgres',    
-    'PASSWORD': 'solnus1234',    
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': 'jardin',
+    'USER': 'postgres',
+    'PASSWORD': 'nelson199412',
     'HOST': 'localhost',
     'PORT': '5432'
     }
@@ -121,6 +122,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_URL = '/login/'
+
+LOGIN_REDIRECT_URL = '/inicio/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

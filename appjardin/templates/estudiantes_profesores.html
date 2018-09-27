@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<table class="table">
+<tr>
+    <td>ID</td>
+    <td>Estudiante</td>
+    <td>Informacion</td>
+    <td>Representante</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td>{{object}}</td>
+    <td>
+      Sangre Tipo: {{ object.id_preinscripcion.id_estudiante.tipo_sangre }}<br>
+      Alergias: {{ object.id_preinscripcion.id_estudiante.alergias }}<br>
+    </td>
+    <td>
+      Representante: {{ object.id_preinscripcion.id_estudiante.id_representante }}<br>
+      Celular: {{ object.id_preinscripcion.id_estudiante.id_representante.celular }}<br>
+      Correo: {{ object.id_preinscripcion.id_estudiante.id_representante.correo }}<br>
+    </td>
+
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
