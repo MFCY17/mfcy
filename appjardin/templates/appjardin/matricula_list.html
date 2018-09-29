@@ -8,6 +8,7 @@
     <td>id_matricula</td>
     <td>costo</td>
     <td>fecha</td>
+    <td>Imprimir</td>
 </tr>
 {% for object in object_list %}
 <tr>
@@ -16,6 +17,7 @@
     <td>{{ object.id_matricula }}</td>
     <td>{{ object.costo }}</td>
     <td>{{ object.fecha }}</td>
+    <td><a class="btn btn-default" href="{{object.get_absolute_url}}">Imprimir</a></td>
 </tr>
 {% endfor %}
 </table><a class="btn btn-primary" href="{% url 'appjardin_matricula_create' %}">Crear nuevo Matricula</a>

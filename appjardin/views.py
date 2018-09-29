@@ -135,7 +135,6 @@ class EstudianteUpdateView(UpdateView):
     model = Estudiante
     form_class = EstudianteForm
 
-
 class MatriculaListView(ListView):
     model = Matricula
 
