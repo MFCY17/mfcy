@@ -178,13 +178,13 @@
                           <li><a href="{% url 'appjardin_paralelo_list' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <!-- <li>
                       <a href="" class="waves-effect"><i class="fa fa-child fa-fw"></i><span class="hide-menu">Niveles <span class="fa arrow"></span></span></a>
                       <ul class="nav nav-second-level">
                           <li><a href="{% url 'appjardin_nivel_create' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Registrar</a></li>
                           <li><a href="{% url 'appjardin_nivel_list' %}" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     <li>
                       <a href="" class="waves-effect"><i class="fa fa-child fa-fw"></i><span class="hide-menu">Alumnos <span class="fa arrow"></span></span></a>
                       <ul class="nav nav-second-level">
@@ -265,20 +265,31 @@
 
             <div id="page-wrapper">
                  <div class="container-fluid" style="padding-top: 2%;">
-                 	<div class="white-box">
-                 {% block content %}
-                 <div style="width: 100%;">
-                    <center style="right: -2%;">
-                    <br><br><br>
-                    <a href="#"><img style="position: relative; top: -20%; transform: translateY(20%);" src="{%static 'images/logo_morado.png'%}" class="img-responsive" width="20%" alt="Logo principal"></a>
-                    <br><br><br>
-                    <h2><strong>BIENVENIDO</strong></h2>
-                    <br>
+        					<div class="row bg-title">
+        						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        						<h4 class="page-title">{% block titulo %} {%endblock%}</h4> </div>
+        						<!-- <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+        							<ol class="breadcrumb">
+        								<li><a href="#">Aprobar</a></li>
+        								<li class="active">Artistas</li>
+        							</ol>
+        						</div> -->
+        						<!-- /.col-lg-12 -->
+        					</div>
+	                <div class="white-box">
+		                 {% block content %}
+		                 <div style="width: 100%;">
+		                    <center style="right: -2%;">
+		                    <br><br><br>
+		                    <a href="#"><img style="position: relative; top: -20%; transform: translateY(20%);" src="{%static 'images/logo_morado.png'%}" class="img-responsive" width="20%" alt="Logo principal"></a>
+		                    <br><br><br>
+		                    <h2><strong>BIENVENIDO</strong></h2>
+		                    <br>
 
-                    </center>
-                 </div>
-                 {%endblock%}
-                 </div>
+		                    </center>
+		                 </div>
+		                 {%endblock%}
+	                </div>
                  </div>
              </div>
 

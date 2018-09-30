@@ -44,7 +44,7 @@ def RolesCreate(request):
 def ProfesoresCreate(request):
     if request.method == 'POST':
         form = AuthUserForm(request.POST)
-        formS = ProfesorForm(request.POST)
+        formS = ProfesorForm(request.POST, request.FILES)
         if form.is_valid():
             if formS.is_valid():
                 utl = form.save()

@@ -3,10 +3,12 @@
 {% block content %}
 <p><a class="btn btn-default" href="{% url 'appjardin_profesor_list' %}">Profesor Listar</a></p>
 <table class="table">
+<tr><td>Imagen</td><td><img src="{{ object.imagen.url }}" class="img-thumbnail" alt=""></td></tr>
 <tr><td>id_profesor</td><td>{{ object.id_profesor }}</td></tr>
-<tr><td>titulo_profesor</td><td>{{ object.titulo_profesor }}</td></tr>
-<tr><td>celular</td><td>{{ object.celular }}</td></tr>
-<tr><td>estado_civil</td><td>{{ object.estado_civil }}</td></tr>
+<tr><td>Estado Civil</td><td>{{ object.estado_civil }}</td></tr>
+<tr><td>Título profesional</td><td>{{ object.titulo_profesor }}</td></tr>
+<tr><td>Celular</td><td>{{ object.celular }}</td></tr>
+<tr><td>Estado Civil</td><td>{{ object.estado_civil }}</td></tr>
 </table>
 <a class="btn btn-primary" href="{{object.get_update_url}}">Editar Profesor</a>
 

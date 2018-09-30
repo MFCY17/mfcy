@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% block titulo %}Profesor ss{%endblock%}
 {% block content %}
 <p><a class="btn btn-default" href="{% url 'appjardin_profesor_list' %}">Profesor Listar</a></p>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
 {% csrf_token %}
+<hr>
+<h4><strong>DATOS DE USUARIO</strong></h4>
+<hr>
 {{form|crispy}}
+<hr>
+<h4><strong>HOJA DE VIDA</strong></h4>
+<hr>
 {{formS|crispy}}
 <br><button class="btn btn-primary" type="submit">Guardar</button>
 </form>

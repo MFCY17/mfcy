@@ -1,6 +1,6 @@
 from django import forms
 from .models import Anolectivo, Estudiante, Matricula, Nivel, Paralelo, Pension, Preinscripcion, AuthUser, Profesor, Representante, Rol, Secretaria
-
+from django.forms import ModelForm,TextInput,FileInput,NumberInput,DateInput,Select,CheckboxSelectMultiple,Textarea,ModelMultipleChoiceField
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -39,7 +39,7 @@ class MatriculaForm(forms.ModelForm):
 class NivelForm(forms.ModelForm):
     class Meta:
         model = Nivel
-        fields = ['id_nivel', 'nombre', 'id_anolectivo']
+        fields = ['id_nivel', 'id_profesor', 'id_anolectivo' , 'paralelo', 'cupos','nombre']
 
 
 class ParaleloForm(forms.ModelForm):
@@ -63,7 +63,11 @@ class PreinscripcionForm(forms.ModelForm):
 class ProfesorForm(forms.ModelForm):
     class Meta:
         model = Profesor
-        fields = ['id_profesor', 'titulo_profesor', 'celular', 'estado_civil']
+        fields = ['id_profesor', 'imagen', 'titulo_profesor', 'edad', 'ciudad', 'genero', 'celular', 'estado_civil', 'direccion',  'observacion']
+        # fields = ('__all__')
+        widgets = {
+            'observacion': Textarea(attrs={'class':'form-control','placeholder':'Información Adicional', 'width':'100%'}),
+            }
 
 
 class RepresentanteForm(forms.ModelForm):

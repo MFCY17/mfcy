@@ -64,18 +64,24 @@ class AuthPermission(models.Model):
 
 
 class AuthUser(models.Model):
-    password = models.CharField(max_length=128)
+    Genero_CHOICES = (
+    ("Masculino", "Masculino"),
+    ("Femenino", "Femenino"),
+    ("Otro", "Otro"),    
+    )
+
+    password = models.CharField(max_length=128, verbose_name = 'Contraseña')
     last_login = models.DateTimeField(blank=True, null=True)
     is_superuser = models.BooleanField(default=False)
-    username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    username = models.CharField(unique=True, max_length=150, verbose_name = 'Nombre de Usuario')
+    first_name = models.CharField(max_length=30, verbose_name = 'Nombres')
+    last_name = models.CharField(max_length=30, verbose_name = 'Apellidos')
     email = models.CharField(max_length=254)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(blank=True, null=True)
     cedula = models.CharField(max_length=30,blank=True, null=True)
-    genero = models.CharField(max_length=30,blank=True, null=True)
+    genero = models.CharField(max_length=30,blank=True, null=True, choices=Genero_CHOICES)
     direccion = models.CharField(max_length=200,blank=True, null=True)
 
     class Meta:
@@ -188,7 +194,7 @@ class Matricula(models.Model):
 
     # Relationship Fields
     id_preinscripcion = models.ForeignKey('Preinscripcion',
-        db_column='id_preinscripcion', on_delete=models.CASCADE, verbose_name = 'Preinscripcion'
+        db_column='id_preinscripcion', on_delete=models.CASCADE, verbose_name = 'Preinscripción'
     )
     id_paralelo = models.ForeignKey('Paralelo',
         db_column='id_paralelo', on_delete=models.CASCADE, verbose_name = 'Paralelo'
@@ -214,10 +220,14 @@ class Nivel(models.Model):
     # Fields
     id_nivel = AutoField(primary_key=True)
     nombre = CharField(max_length=50)
-
+    paralelo = CharField(max_length=10, verbose_name = 'Paralelo')
+    cupos = IntegerField(verbose_name = 'Cupos')
     # Relationship Fields
     id_anolectivo = models.ForeignKey('Anolectivo',
         db_column='id_anolectivo', on_delete=models.CASCADE, verbose_name = 'Año Lectivo'
+    )
+    id_profesor = models.ForeignKey('Profesor',
+        db_column='id_profesor', on_delete=models.CASCADE, verbose_name = 'Profesor'
     )
 
     class Meta:
@@ -240,11 +250,11 @@ class Paralelo(models.Model):
 
     # Fields
     id_paralelo = IntegerField(primary_key=True)
-
     # Relationship Fields
     id_profesor = models.ForeignKey('Profesor',
         db_column='id_profesor', on_delete=models.CASCADE
     )
+    
 
     class Meta:
         ordering = ('-pk',)
@@ -295,16 +305,16 @@ class Preinscripcion(models.Model):
 
     # Relationship Fields
     id_estudiante = ForeignKey('Estudiante',
-        db_column='id_estudiante', on_delete=models.CASCADE
+        db_column='id_estudiante', on_delete=models.CASCADE, verbose_name="Estudiante"
     )
     id_representante = ForeignKey('Representante',
-        db_column='id_representante', on_delete=models.CASCADE
+        db_column='id_representante', on_delete=models.CASCADE, verbose_name="Representante"
     )
     id_nivel = ForeignKey('Nivel',
-        db_column='id_nivel', on_delete=models.CASCADE
+        db_column='id_nivel', on_delete=models.CASCADE, verbose_name="Nivel"
     )
     id_secretaria = ForeignKey('Secretaria',
-        db_column='id_secretaria', on_delete=models.CASCADE
+        db_column='id_secretaria', on_delete=models.CASCADE, verbose_name = "Secretaria"
     )
 
     class Meta:
@@ -324,12 +334,29 @@ class Preinscripcion(models.Model):
 
 class Profesor(models.Model):
 
-
+    # Choices
+    MONTH_CHOICES = (
+    ("Soltero", "Soltero"),
+    ("Casado", "Casado"),
+    ("Divorciado", "Divorciado"),
+    ("Viudo", "Viudo"),
+    )
+    Genero_CHOICES = (
+    ("Masculino", "Masculino"),
+    ("Femenino", "Femenino"),
+    ("Otro", "Otro"),    
+    )
     # Fields
     id_profesor = AutoField(primary_key=True)
-    titulo_profesor = CharField(max_length=50)
-    celular = CharField(max_length=25)
-    estado_civil = CharField(max_length=10)
+    imagen = models.ImageField(max_length=100,upload_to='imagenprofesor',verbose_name = 'Imagen')
+    titulo_profesor = CharField(max_length=50,verbose_name = 'Título')
+    edad = IntegerField(verbose_name = 'Edad')
+    ciudad = CharField(max_length=50,verbose_name = 'Ciudad')
+    estado_civil = CharField(max_length=10, choices=MONTH_CHOICES,verbose_name = 'Estado Civil')
+    genero = CharField(max_length=10, choices=Genero_CHOICES, verbose_name = 'Género')
+    direccion = CharField(max_length=50, verbose_name = 'Dirección')
+    celular = CharField(max_length=25,verbose_name = 'Celular')
+    observacion = CharField(max_length=500, verbose_name = 'Observación')
 
     # Relationship Fields
     id = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='id')
