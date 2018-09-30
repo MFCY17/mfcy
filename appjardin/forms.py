@@ -27,7 +27,7 @@ class AuthUserForm(forms.ModelForm):
 class EstudianteForm(forms.ModelForm):
     class Meta:
         model = Estudiante
-        fields = ['id_estudiante', 'tipo_sangre', 'alergias', 'id_secretaria','id_representante']
+        fields = ['id_estudiante', 'tipo_sangre', 'alergias','id_representante']
 
 
 class MatriculaForm(forms.ModelForm):
@@ -39,7 +39,7 @@ class MatriculaForm(forms.ModelForm):
 class NivelForm(forms.ModelForm):
     class Meta:
         model = Nivel
-        fields = ['id_nivel', 'id_profesor', 'id_anolectivo' , 'paralelo', 'cupos','nombre']
+        fields = ['id_nivel', 'id_profesor', 'id_anolectivo' , 'paralelo', 'cupos']
 
 
 class ParaleloForm(forms.ModelForm):

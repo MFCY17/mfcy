@@ -106,7 +106,7 @@ class EstudianteAdmin(admin.ModelAdmin):
         'id_estudiante',
         'tipo_sangre',
         'alergias',
-        'id_secretaria',
+        # 'id_secretaria',
         'id',
         'id_representante',
     )

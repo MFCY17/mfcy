@@ -5,10 +5,10 @@
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
-    <td>id_estudiante</td>
-    <td>tipo_sangre</td>
-    <td>alergias</td>
-    <td>id_secretaria</td>
+    <td>ID Estudiante</td>
+    <td>Tipo de Sangre</td>
+    <td>Alergias</td>
+    <td>Representante</td>
 </tr>
 {% for object in object_list %}
 <tr>
@@ -17,7 +17,7 @@
     <td>{{ object.id_estudiante }}</td>
     <td>{{ object.tipo_sangre }}</td>
     <td>{{ object.alergias }}</td>
-    <td>{{ object.id_secretaria }}</td>
+    <td><a href="{{object.id_representante.get_absolute_url}}">{{ object.id_representante }}</a></td>
 </tr>
 {% endfor %}
 </table><a class="btn btn-primary" href="{% url 'appjardin_estudiante_create' %}">Crear nuevo Estudiante</a>

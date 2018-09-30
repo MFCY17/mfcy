@@ -162,12 +162,12 @@ class Estudiante(models.Model):
     id_estudiante = AutoField(primary_key=True)
     tipo_sangre = CharField(max_length=10)
     alergias = CharField(max_length=300)
-    id_secretaria = IntegerField()
+    # id_secretaria = IntegerField()
 
     # Relationship Fields
     id = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='id')
     id_representante = models.ForeignKey('Representante',
-        db_column='id_representante', on_delete=models.CASCADE
+        db_column='id_representante', on_delete=models.CASCADE, verbose_name="Representante"
     )
 
     class Meta:
