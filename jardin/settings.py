@@ -25,7 +25,7 @@ SECRET_KEY = '7*vx$oxs=pfg*tbeawsllf5mqrr3yb^n5ylo5%w@^$jgtd_ggn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['172.20.0.3',]
 
 
 # Application definition
@@ -87,9 +87,9 @@ DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
     'NAME': 'jardin',
-    'USER': 'postgres',
-    'PASSWORD': 'postgres',
-    'HOST': 'localhost',
+    'USER': 'mfcy_user',
+    'PASSWORD': 'mfcy_pass',
+    'HOST': 'db',
     'PORT': '5432'
     }
 }
