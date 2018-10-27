@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'appjardin'
+
+
+    
+
 ]
 
 MIDDLEWARE = [
@@ -84,7 +88,7 @@ DATABASES = {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
     'NAME': 'jardin',
     'USER': 'postgres',
-    'PASSWORD': 'nelson199412',
+    'PASSWORD': 'postgres',
     'HOST': 'localhost',
     'PORT': '5432'
     }

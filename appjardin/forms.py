@@ -86,3 +86,4 @@ class SecretariaForm(forms.ModelForm):
     class Meta:
         model = Secretaria
         fields = ['id_secretaria', 'fecha_ingreso']
+        

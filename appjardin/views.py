@@ -8,6 +8,10 @@ from django.contrib.auth.decorators  import  login_required
 from django.utils.decorators  import  method_decorator
 
 
+def index(request):
+    ctx = {}
+    return render(request,'index1.html',ctx) 
+
 @login_required(login_url='/login/')
 def representante_estudiante(request):
     est = Matricula.objects.filter(id_preinscripcion__id_estudiante__id_representante__id=request.user.id).order_by('pk')
@@ -18,7 +22,7 @@ def representante_estudiante(request):
 def estudiante_profesores(request):
     est = Matricula.objects.filter(id_paralelo__id_profesor__id=request.user.id).order_by('pk')
     ctx = {'object_list':est}
-    return render(request,'estudiantes_profesores.html',ctx)
+    return render(request,'estudiantes_profesores.|||||||||||||||html',ctx)
 
 @login_required(login_url='/login/')
 def RolesCreate(request):

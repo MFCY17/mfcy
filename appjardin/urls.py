@@ -23,7 +23,9 @@ from django.views.generic.base import TemplateView
 urlpatterns = [
     # urls for Django Rest Framework API
     # url(r'^api/v1/', include(router.urls)),
+    url(r'^$', views.index, name ='index'),
     url(r'inicio/$', TemplateView.as_view(template_name='base.html'), name ='inicio'),
+    url(r'usuariologin/$', TemplateView.as_view(template_name='baselogin.html'), name ='usuariologin'),
     url(r'^rol/$', views.RolesCreate, name='RolesCreate'),
     url(r'^representante/estudiantes/$', views.representante_estudiante, name='representante_estudiante'),
     url(r'^profesores/estudiante$', views.estudiante_profesores, name='estudiante_profesores'),

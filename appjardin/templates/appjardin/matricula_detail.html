@@ -3,19 +3,21 @@
 {% block content %}
 <a class="btn btn-default" href="{% url 'appjardin_matricula_list' %}">Matricula Listar</a>
 <a class="btn btn-primary" href="{{object.get_update_url}}">Editar Matricula</a>
-<button id="print" class="btn btn-default btn-outline print-div" type="button"> <span><i class="fa fa-print"></i> Imprimir</span> </button>
+<button id="print" class="btn btn-default btn-outline print-div" type="button"> <span><i class="fa fa-print"></i> Imprimir</span> </button> 
 <div class="print-matricula">
+  <center><img src="{%static 'assets/img/LOGOIMPRESO.png'%}" alt="logo"></center>
   <br>
   <table class="table">
     <tr><td># Matricula</td><td>{{ object.id_matricula }}</td></tr>
-    <tr><td>Costo</td><td>{{ object.costo }}</td></tr>
     <tr><td>Fecha</td><td>{{ object.fecha }}</td></tr>
     <tr><td>Estudiante:</td><td>{{ object.id_preinscripcion.id_estudiante }}</td></tr>
     <tr><td>Representante:</td><td>{{ object.id_preinscripcion.id_representante }}</td></tr>
     <tr><td>Profesor</td><td>{{ object.id_paralelo.id_profesor }}</td></tr>
     <tr><td>Nivel</td><td>{{ object.id_preinscripcion.id_nivel }}</td></tr>
     <tr><td>Año Lectivo</td><td>{{ object.id_preinscripcion.id_nivel.id_anolectivo   }}</td></tr>
+    <tr><td>Costo</td><td>{{ object.costo }}</td></tr>
   </table>
+
 </div>
 
 <script src="{% static 'jquery.PrintArea.js' %}"></script>

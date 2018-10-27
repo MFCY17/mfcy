@@ -1,0 +1,254 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" sizes="16x16" href="{%static 'images/logo_morado.png'%}">
+    <title>Mi Little Friends</title>
+    <!-- Bootstrap Core CSS -->
+
+    <link href="{%static 'wp-admin/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{%static 'wp-admin/css/sweetalert.css' %}" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="{%static 'wp-admin/plugins/sidebar-nav/dist/sidebar-nav.min.css' %}" rel="stylesheet">
+    <!-- toast CSS -->
+    <link rel="stylesheet" href="{%static 'wp-admin/plugins/custom-select/custom-select.css'%}">
+    <link rel="stylesheet" href="{%static 'wp-admin/plugins/multi-select/bootstrap-select.min.css'%}">
+    <link href="{%static 'wp-admin/plugins/toast-master/css/jquery.toast.css' %}" rel="stylesheet">
+    <!-- morris CSS -->
+    <link href="{%static 'wp-admin/plugins/morrisjs/morris.css' %}" rel="stylesheet">
+    <!-- chartist CSS -->
+    <link href="{%static 'wp-admin/plugins/chartist-js/dist/chartist.min.css' %}" rel="stylesheet">
+    <link href="{% static 'wp-admin/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css' %}" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="{% static 'wp-admin/css/animate.css' %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'wp-admin/css/style.css' %}" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="{% static 'wp-admin/css/colors/default.css' %}" id="theme" rel="stylesheet">
+    {%block jquery%}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{%static 'javascript/jquery-ui.js' %}"></script>
+    {%endblock%}
+    <script src="{% static 'wp-admin/js/sweetalert.min.js' %}"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122748521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-122748521-1');
+</script>
+</head>
+
+<body class="fix-header">
+<script>
+        $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+</script>
+    <!-- Preloader -->
+    <!-- Preloader -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- Topbar header - style you can find in pages.scss -->
+        <nav class="navbar navbar-default navbar-static-top m-b-0">
+            <div class="navbar-header">
+                <!-- Logo -->
+                <div class="top-left-part">
+                    <a class="logo" href="#">
+                        <b>
+                      <!--This is dark logo icon--><img src="{% static 'wp-admin/images/admin-logo-dark.png'%}" alt="home" class="dark-logo" /><!--This is light logo icon--><img src="{% static 'wp-admin/images/admin-logo-dark.png'%}" alt="home" class="light-logo" />
+                    </b>
+                      <span class="hidden-xs">
+
+                        <img src="{% static 'wp-admin/images/logo_deos.png'%}" alt="home" class="dark-logo" />
+                        <img src="{%static 'wp-admin/images/logo_deos.png'%}" alt="home" class="light-logo" />
+                      </span>
+                    </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-left">
+                    <li><a href="javascript:void(0)" class="open-close waves-effect waves-light"><i style="color:#fff" class="fa fa-bars"></i></a></li>
+                </ul>
+                <!-- /Logo -->
+                <ul class="nav navbar-top-links navbar-right pull-right">
+                    <li>
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="{% static 'wp-admin/images/users/varun2.png' %}" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><?php echo $user; ?></b><span class="caret"></span> </a>
+                        <ul class="dropdown-menu dropdown-user animated flipInY">
+                            <li>
+                                <div class="dw-user-box">
+                                    <div class="u-img"><img src="{%static 'wp-admin/images/users/varun.png' %}" alt="user" /></div>
+                                    <div class="u-text">
+                                        <h4>{{request.user}}</h4>
+                                        <p class="text-muted">Mi perfil</p></div>
+                                </div>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#"><i class="ti-settings"></i>Editar Perfil</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Cerrar Sesion</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav slimscrollsidebar">
+                <div class="sidebar-head">
+                    <h3><span class="fa-fw open-close"><i class="fa fa-times fa-times"></i></span> <span class="hide-menu">#LOJACCM<span class="fa fa-arrow"></span></span></h3>
+                </div>
+                <ul class="nav in" id="side-menu">
+                    <li>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+                      <div class="col-md-4">
+                        <a class="inbox-avatar" href="javascript:;">
+                            <img  width="50" hieght="60" src="{%static 'images/microfono.png'%}">
+                        </a>
+                        </div>
+                        <div class="col-md-8">
+                            <p style="line-height: 20px;" >{{request.user.first_name|title}} {{request.user.last_name|title}}</p>
+                            <p style="line-height: 10px;">{{request.user.username}}</p>
+                        </div>
+
+                    </li>
+                    <hr>
+                    <li style="padding: 0px 0 0;">
+                        <a href="{% url 'inicio' %}" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i>Inicio</a>
+                    </li>
+                    {% if request.user.is_superuser %}
+                    {% endif %}
+                    <!-- Secretaria -->
+                    {% if request.user.secretaria or request.user.is_superuser %}
+                    <li>
+                      <a href="" class="waves-effect"><i class="fa fa-users fa-fw"></i><span class="hide-menu">Preinscripciones <span class="fa arrow"></span></span></a>
+                      <ul class="nav nav-second-level">
+                        <li><a href="#" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Añadir</a></li>
+                        <li><a href="#" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Listar / Editar</a></li>
+                        </ul>
+                    </li>
+            
+                    {% endif %}
+
+
+                    <!-- <li>
+                        <a href="#?" class="waves-effect"><i class="fa fa-history fa-fw" data-icon="v"></i><span class="hide-menu">Instituciones<span class="fa arrow"></span> </span></a>
+                        <ul class="nav nav-second-level">
+                          <li><a href="" class="waves-effect"><i class="fa fa-search fa-fw" aria-hidden="true"></i>Buscar</a></li>
+                          <li><a href="" class="waves-effect"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>Crear</a></li>
+
+                          <li><a href="#" class="waves-effect"><i class="fa fa-file fa-fw" aria-hidden="true"></i>Medios de Comunicación</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i>Estado de Cuenta</a>
+                    </li>
+                    <li>
+                        <a href="" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Lista de usuarios</a>
+                    </li> -->
+                    <li>
+                        <a href="{% url 'logout' %}" class="waves-effect"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>Cerrar Sesion</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+
+            <div id="page-wrapper">
+                 <div class="container-fluid" style="padding-top: 2%;">
+        					<div class="row bg-title">
+        						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        						<h4 class="page-title">{% block titulo %} {%endblock%}</h4> </div>
+        						<!-- <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+        							<ol class="breadcrumb">
+        								<li><a href="#">Aprobar</a></li>
+        								<li class="active">Artistas</li>
+        							</ol>
+        						</div> -->
+        						<!-- /.col-lg-12 -->
+        					</div>
+	                <div class="white-box">
+		                 {% block content %}
+		                 <div style="width: 100%;">
+		                    <center style="right: -2%;">
+		                    <br><br><br>
+		                    <a href="#"><img style="position: relative; top: -20%; transform: translateY(20%);" src="{%static 'images/logo_morado.png'%}" class="img-responsive" width="20%" alt="Logo principal"></a>
+		                    <br><br><br>
+		                    <h2><strong>BIENVENIDO</strong></h2>
+		                    <br>
+
+		                    </center>
+		                 </div>
+		                 {%endblock%}
+	                </div>
+                 </div>
+             </div>
+
+        <footer class="footer text-center">&copy;
+          <a href="#" title="DEOS GYM">My little Friends</a>
+           2018
+
+         </footer>
+    </div>
+
+	<script>
+		$( "input" ).addClass( "form-control" );
+		$( "radio" ).addClass( "form-control" );
+		$( "select" ).addClass( "form-control" );
+	</script>
+    <!-- All Jquery -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'wp-admin/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+    <!-- Menu Plugin JavaScript -->
+    <script src="{% static 'wp-admin/plugins/sidebar-nav/dist/sidebar-nav.min.js' %}"></script>
+    <!--slimscroll JavaScript -->
+    <script src="{% static 'wp-admin/js/jquery.slimscroll.js' %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'wp-admin/js/waves.js' %}"></script>
+    <!--Counter js -->
+    <script src="{% static 'wp-admin/plugins/waypoints/lib/jquery.waypoints.js' %}"></script>
+    <script src="{% static 'wp-admin/plugins/counterup/jquery.counterup.min.js' %}"></script>
+    <!-- chartist chart -->
+    <script src="{% static 'wp-admin/plugins/chartist-js/dist/chartist.js' %}"></script>
+    <script src="{% static 'wp-admin/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip' %}.min.js"></script>
+    <!-- Sparkline chart JavaScript -->
+    <script src="{% static 'wp-admin/plugins/jquery-sparkline/jquery.sparkline.min.js' %}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'wp-admin/js/custom.min.js' %}"></script>
+    <script src="{% static 'wp-admin/js/dashboard1.js' %}"></script>
+    <script src="{% static 'wp-admin/plugins/toast-master/js/jquery.toast.js' %}"></script>
+    <!-- Multiselect -->
+    <script src="{% static 'wp-admin/plugins/custom-select/custom-select.js' %}"></script>
+    <script src="{% static 'wp-admin/plugins/custom-select/validador.js' %}"></script>
+    <!-- E MODAL -->
+    <script src="//rawgit.com/saribe/eModal/master/dist/eModal.min.js"></script>
+</body>
+
+</html>
