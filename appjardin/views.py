@@ -1,12 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db import IntegrityError, transaction
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
 
 from .forms import *
 from .models import *
-from django.db import IntegrityError, transaction
 
 
 def index(request):
@@ -142,6 +142,33 @@ def registerRepresentative(request):
     except IntegrityError:
         handle_exception()
     return render(request, 'appjardin/registerRepresentative/register.html',
+                  locals())
+
+
+@login_required(login_url='/login/')
+def updateRepresentative(request):
+    if request.user is None:
+        return render(request, 'index.html', locals())
+
+    user = User.objects.get(pk=request.user.id)
+    if user is None:
+        return render(request, 'index.html', locals())
+    representative = Representante.objects.get(id_id=user.id)
+    if representative is None:
+        return render(request, 'index.html', locals())
+    form = RepresentanteUserForm(instance=representative)
+    form_user = AuthUserUpdateForm(instance=user)
+    try:
+
+        with transaction.atomic():
+            if request.method == 'POST':
+                if form.is_valid() and form_user.is_valid():
+                    form_user.save()
+                    form.save()
+    except IntegrityError:
+        handle_exception()
+    return render(request,
+                  'appjardin/registerRepresentative/updateRepresentative.html',
                   locals())
 
 

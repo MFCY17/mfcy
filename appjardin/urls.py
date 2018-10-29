@@ -85,7 +85,10 @@ urlpatterns = [
     url(r'^appjardin/secretaria/detail/(?P<pk>\S+)/$', views.SecretariaDetailView.as_view(), name='appjardin_secretaria_detail'),
     url(r'^appjardin/secretaria/update/(?P<pk>\S+)/$', views.SecretariaUpdateView.as_view(), name='appjardin_secretaria_update'),
     url(r'^appjardin/registerRepresentative/$',views.registerRepresentative, name='appjardin_registerRepresentative'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  url(r'^appjardin/updateRepresentative/$',
+                      views.updateRepresentative,
+                      name='appjardin_updateRepresentative'),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # urlpatterns += [
 # 	url(r'^$', views.index, name='index'),

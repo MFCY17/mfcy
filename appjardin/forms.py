@@ -139,3 +139,15 @@ class AuthUserRegisterForm(forms.ModelForm):
                 username=username).count():
             raise forms.ValidationError('Ya existe un usuario con este email.')
         return email
+
+class RepresentanteUserForm(forms.ModelForm):
+
+    class Meta:
+        model = Representante
+        fields = ['id_representante', 'celular',]
+
+class AuthUserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = AuthUser
+        fields = [ 'first_name', 'last_name', 'email',
+                  'cedula', 'genero', 'direccion']
