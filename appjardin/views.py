@@ -150,7 +150,7 @@ def updateRepresentative(request):
     if request.user is None:
         return render(request, 'index.html', locals())
 
-    user = User.objects.get(pk=request.user.id)
+    user = AuthUser.objects.get(pk=request.user.id)
     if user is None:
         return render(request, 'index.html', locals())
     representative = Representante.objects.get(id_id=user.id)
@@ -159,9 +159,11 @@ def updateRepresentative(request):
     form = RepresentanteUserForm(instance=representative)
     form_user = AuthUserUpdateForm(instance=user)
     try:
-
         with transaction.atomic():
             if request.method == 'POST':
+                form = RepresentanteUserForm(request.POST,
+                                             instance=representative)
+                form_user = AuthUserUpdateForm(request.POST, instance=user)
                 if form.is_valid() and form_user.is_valid():
                     form_user.save()
                     form.save()
