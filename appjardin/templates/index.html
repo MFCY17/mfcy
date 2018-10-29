@@ -44,7 +44,7 @@
         <div class="navbar-collapse collapse">
             <nav>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="page-scroll" href="/registrologin">Registrarse</a>
+                    <li><a class="page-scroll" href="/appjardin/registerRepresentative">Registrarse</a>
                     </ul>
                 </nav>
             </div> 
@@ -54,7 +54,7 @@
                 
                 <h3 class="box-title m-b-0">Ingresar</h3>
                 <small>Ingrese sus datos a continuación</small>
-                <form method="POST" class="search-form">
+                <form method="POST" action="{{ login }}" class="search-form">
                     {% csrf_token %}
                     <input style="height: 3em" type="text" id="inputEmail" class="form-control" name="username" placeholder="Usuario" required autofocus><br>
                     <input style="height: 3em" type="password" id="inputPassword" class="form-control" name="password" placeholder="Contraseña" required>

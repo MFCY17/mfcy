@@ -1,24 +1,24 @@
 # from django.conf.urls import url, include
-from django.conf.urls import *
-from . import views
-from rest_framework import routers
-from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls import *
+from django.conf.urls.static import static
 # from . import api
 from django.views.generic.base import TemplateView
 
+from . import views
+
 # router = routers.DefaultRouter()
-# router.register(r'anolectivo', api.AnolectivoViewSet)
-# router.register(r'estudiante', api.EstudianteViewSet)
-# router.register(r'matricula', api.MatriculaViewSet)
-# router.register(r'nivel', api.NivelViewSet)
-# router.register(r'paralelo', api.ParaleloViewSet)
-# router.register(r'pension', api.PensionViewSet)
-# router.register(r'preinscripcion', api.PreinscripcionViewSet)
-# router.register(r'profesor', api.ProfesorViewSet)
-# router.register(r'representante', api.RepresentanteViewSet)
-# router.register(r'rol', api.RolViewSet)
-# router.register(r'secretaria', api.SecretariaViewSet)
+# router.registerRepresentative(r'anolectivo', api.AnolectivoViewSet)
+# router.registerRepresentative(r'estudiante', api.EstudianteViewSet)
+# router.registerRepresentative(r'matricula', api.MatriculaViewSet)
+# router.registerRepresentative(r'nivel', api.NivelViewSet)
+# router.registerRepresentative(r'paralelo', api.ParaleloViewSet)
+# router.registerRepresentative(r'pension', api.PensionViewSet)
+# router.registerRepresentative(r'preinscripcion', api.PreinscripcionViewSet)
+# router.registerRepresentative(r'profesor', api.ProfesorViewSet)
+# router.registerRepresentative(r'representante', api.RepresentanteViewSet)
+# router.registerRepresentative(r'rol', api.RolViewSet)
+# router.registerRepresentative(r'secretaria', api.SecretariaViewSet)
 
 urlpatterns = [
     # urls for Django Rest Framework API
@@ -84,6 +84,7 @@ urlpatterns = [
     url(r'^appjardin/secretaria/create/$', views.SecretariaCreateView.as_view(), name='appjardin_secretaria_create'),
     url(r'^appjardin/secretaria/detail/(?P<pk>\S+)/$', views.SecretariaDetailView.as_view(), name='appjardin_secretaria_detail'),
     url(r'^appjardin/secretaria/update/(?P<pk>\S+)/$', views.SecretariaUpdateView.as_view(), name='appjardin_secretaria_update'),
+    url(r'^appjardin/registerRepresentative/$',views.registerRepresentative, name='appjardin_registerRepresentative'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # urlpatterns += [
