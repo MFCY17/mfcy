@@ -16,10 +16,14 @@
     <div class="image"></div>
     <div class="frm">
         <h1>Registro</h1>
+        {% if messages %}
+            {{ messages }}
+        {% endif %}
         <form method="POST" class="post-form">{% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-success btn-lg">Save</button>
         </form>
+
     </div>
 </div>
 </body>

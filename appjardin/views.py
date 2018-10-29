@@ -1,12 +1,12 @@
-from django.views.generic import DetailView, ListView, UpdateView, CreateView
-from django.shortcuts import render
-from django.shortcuts import redirect
-from django.contrib.auth.models import User
-from .models import *
-from .forms import *
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-# from django.conf import settings
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
+from django.shortcuts import render
+from django.views.generic import DetailView, ListView, UpdateView, CreateView
+
+from .forms import *
+from .models import *
+from django.db import IntegrityError, transaction
 
 
 def index(request):
@@ -121,19 +121,26 @@ def RepresentanteCreateView(request):
 
 def registerRepresentative(request):
     form = AuthUserRegisterForm()
-
-    if request.method == 'POST':
-        form = AuthUserRegisterForm(request.POST)
-
-        if form.is_valid():
-            userForm = form.save(commit=False)
-            user = User()
-            user.set_password(userForm.password)
-            user.email=userForm.email
-            user.username = userForm.username
-            user.is_active = True
-            user.save()
-            return render(request, 'index.html', locals())
+    try:
+        with transaction.atomic():
+            if request.method == 'POST':
+                form = AuthUserRegisterForm(request.POST)
+                messages = None
+                if form.is_valid():
+                    userForm = form.save(commit=False)
+                    user = User()
+                    user.set_password(userForm.password)
+                    user.email = userForm.email
+                    user.username = userForm.username
+                    user.is_active = True
+                    user.save()
+                    representante = Representante()
+                    representante.id_id = user.id
+                    representante.correo = user.email
+                    representante.save()
+                    return render(request, 'index.html', locals())
+    except IntegrityError:
+        handle_exception()
     return render(request, 'appjardin/registerRepresentative/register.html',
                   locals())
 
