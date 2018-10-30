@@ -1,3 +1,6 @@
+from builtins import Exception
+
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError, transaction
@@ -167,10 +170,52 @@ def updateRepresentative(request):
                 if form.is_valid() and form_user.is_valid():
                     form_user.save()
                     form.save()
+                    messages.success(request,
+                                     'Tus datos han sido actualizados exitosamente.')
     except IntegrityError:
-        handle_exception()
+        messages.error(request,
+                       'Error al actualizar sus datos.')
     return render(request,
                   'appjardin/registerRepresentative/updateRepresentative.html',
+                  locals())
+
+
+@login_required(login_url='/login/')
+def createStudentByRepresentative(request):
+    form = StudentByRepresentativeForm()
+    form_user = AuthUserUpdateForm()
+    try:
+        with transaction.atomic():
+            if request.method == 'POST':
+                representative = Representante.objects.filter(
+                    id=request.user.id).first()
+                form = StudentByRepresentativeForm(request.POST)
+                form_user = AuthUserUpdateForm(request.POST)
+                if form.is_valid() and form_user.is_valid():
+                    user_form = form_user.save(commit=False)
+                    user = User()
+                    user.set_password(user_form.cedula)
+                    user.username = user_form.cedula
+                    user.direccion = user_form.direccion
+                    user.first_name = user_form.first_name
+                    user.last_name = user_form.last_name
+                    user.email = user_form.email
+                    user.genero = user_form.genero
+                    user.save()
+                    student_form = form.save(commit=False)
+                    student = Estudiante()
+                    student.id_representante_id = representative.id_representante
+                    student.id_id = user.id
+                    student.alergias = student_form.alergias
+                    student.save()
+                    messages.success(request,
+                                     'Tus datos han sido actualizados exitosamente.')
+    except Exception as e:
+        print('error', e)
+        messages.error(request,
+                       'Error al actualizar sus datos.')
+    return render(request,
+                  'appjardin/registerRepresentative/studentCreate.html',
                   locals())
 
 
@@ -208,6 +253,17 @@ class EstudianteDetailView(DetailView):
 class EstudianteUpdateView(UpdateView):
     model = Estudiante
     form_class = EstudianteForm
+
+
+class StudentByRepresentativeListView(ListView):
+    model = Estudiante
+    paginate_by = 20
+
+    def get_queryset(self):
+        representative = Representante.objects.filter(
+            id=self.request.user.id).first()
+        return Estudiante.objects.filter(
+            id_representante=representative.id_representante).all()
 
 
 class MatriculaListView(ListView):

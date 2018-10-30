@@ -84,10 +84,15 @@ urlpatterns = [
     url(r'^appjardin/secretaria/create/$', views.SecretariaCreateView.as_view(), name='appjardin_secretaria_create'),
     url(r'^appjardin/secretaria/detail/(?P<pk>\S+)/$', views.SecretariaDetailView.as_view(), name='appjardin_secretaria_detail'),
     url(r'^appjardin/secretaria/update/(?P<pk>\S+)/$', views.SecretariaUpdateView.as_view(), name='appjardin_secretaria_update'),
+
     url(r'^appjardin/registerRepresentative/$',views.registerRepresentative, name='appjardin_registerRepresentative'),
                   url(r'^appjardin/updateRepresentative/$',
                       views.updateRepresentative,
                       name='appjardin_updateRepresentative'),
+
+url(r'^appjardin/students-by-representative/$', views.StudentByRepresentativeListView.as_view(template_name='appjardin/registerRepresentative/studentsByRepresentativeList.html'), name='appjardin_students_by_representative'),
+url(r'^appjardin/students-by-representative/create/$',views.createStudentByRepresentative, name='appjardin_students_by_representative_create'),
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # urlpatterns += [

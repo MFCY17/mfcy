@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>ID Estudiante</td>
+    <td>Tipo de Sangre</td>
+    <td>Alergias</td>
+
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.id_estudiante }}</td>
+    <td>{{ object.tipo_sangre }}</td>
+    <td>{{ object.alergias }}</td>
+
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'appjardin_students_by_representative_create' %}">Crear nuevo Estudiante</a>
+{% endblock %}

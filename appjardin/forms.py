@@ -43,6 +43,10 @@ class EstudianteForm(forms.ModelForm):
         fields = ['id_estudiante', 'tipo_sangre', 'alergias',
                   'id_representante']
 
+class StudentByRepresentativeForm(forms.ModelForm):
+    class Meta:
+        model = Estudiante
+        fields = ['id_estudiante', 'tipo_sangre', 'alergias']
 
 class MatriculaForm(forms.ModelForm):
     class Meta:

@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-    <h1>Datos de Representante</h1>
+    <h1>Datos de Estudiante</h1>
 
     <form method="POST">
         {% csrf_token %}
@@ -15,7 +15,7 @@
         {% endif %}
         {{ form.as_p }}
         {{ form_user.as_p }}
-        <button type="submit" class="btn btn-success btn-lg">Save</button>
+        <button type="submit" class="btn btn-success btn-lg">Guardar</button>
     </form>
     </div>
 {% endblock %}
